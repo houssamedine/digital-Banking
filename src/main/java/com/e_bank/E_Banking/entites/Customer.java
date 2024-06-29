@@ -21,5 +21,4 @@ public class Customer {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Bank_Account> bankAccountsList;
 
-
 }
