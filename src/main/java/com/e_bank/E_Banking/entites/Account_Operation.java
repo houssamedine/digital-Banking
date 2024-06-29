@@ -27,4 +27,6 @@ public class Account_Operation {
     @JoinColumn(name = "id_bank")
     private Bank_Account bankAccount;
 
+    private String description;
+
 }
