@@ -1,4 +1,4 @@
-package com.e_bank.E_Banking.services.impl;
+package com.e_bank.E_Banking.services.BankAccount;
 
 import com.e_bank.E_Banking.Exceptions.BalanceNotSufficientException;
 import com.e_bank.E_Banking.Exceptions.BankAccountNotFoundException;
@@ -7,13 +7,13 @@ import com.e_bank.E_Banking.entites.*;
 import com.e_bank.E_Banking.enums.OperationType;
 import com.e_bank.E_Banking.repository.AccountOperationRepository;
 import com.e_bank.E_Banking.repository.BanckAccountRepository;
-import com.e_bank.E_Banking.services.BankAccountService;
-import com.e_bank.E_Banking.services.CustomerService;
+import com.e_bank.E_Banking.services.Customer.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -33,7 +33,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public CurrentAccount saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId) {
+    public CurrentAccount saveCurrentBankAccount(double initialBalance, double overDraft, String customerId) {
         Customer customer= customerService.getCustomerById(customerId);
         if(customer == null){
             throw  new CustomerNotFoundException("Customer not found !!");
@@ -50,7 +50,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public SavingAccount saveSavingBankAccount(double initialBalance, double intersetRate, Long customerId) {
+    public SavingAccount saveSavingBankAccount(double initialBalance, double interestRate, String customerId) {
         Customer customer= customerService.getCustomerById(customerId);
         if(customer == null){
             throw  new CustomerNotFoundException("Customer not found !!");
@@ -61,16 +61,16 @@ public class BankAccountServiceImpl implements BankAccountService {
         savingBankAccount.setId_bank(UUID.randomUUID().toString());
         savingBankAccount.setCreatedAt(new Date());
         savingBankAccount.setBalance(initialBalance);
-        savingBankAccount.setInterestRate(intersetRate);
+        savingBankAccount.setInterestRate(interestRate);
         savingBankAccount.setCustomer(customer);
         SavingAccount saveCurrAccount = banckAccountRepository.save(savingBankAccount);
         return saveCurrAccount;
     }
 
+
     @Override
     public Bank_Account getBankAccountById(String id) {
         Bank_Account bankAccount=banckAccountRepository.findById(id).orElseThrow(()-> new BankAccountNotFoundException("Account Not Found !!"));
-
         return bankAccount;
     }
 
@@ -108,7 +108,14 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public void transferToAccount(String accountIdSource, String accountIdDestination, double amount) {
-
+    public void transferToAccount(String accountIdSource, String accountIdDestination, double amount,String description) throws BalanceNotSufficientException,BankAccountNotFoundException {
+        debitAccount(accountIdSource,amount,description +" to "+accountIdDestination);
+        creditAccount(accountIdDestination,amount,description+ " from "+accountIdSource );
     }
+
+    @Override
+    public List<Bank_Account> bankAccountList(){
+        return banckAccountRepository.findAll();
+    }
+
 }

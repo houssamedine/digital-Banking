@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "BANK_ACCOUNTS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

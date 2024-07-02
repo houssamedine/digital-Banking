@@ -1,8 +1,7 @@
-package com.e_bank.E_Banking.services.impl;
+package com.e_bank.E_Banking.services.Customer;
 
 import com.e_bank.E_Banking.entites.Customer;
 import com.e_bank.E_Banking.repository.CustomerRepository;
-import com.e_bank.E_Banking.services.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -46,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public Customer getCustomerById(Long id) {
+    public Customer getCustomerById(String id) {
         return customerRepository.findById(id).get();
     }
 
@@ -58,11 +57,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> lisCustomers() {
-        return List.of();
+
+        return customerRepository.findAll();
     }
 
     @Override
-    public void deleteCustomerById(Long id) {
+    public void deleteCustomerById(String id) {
 
     }
 }

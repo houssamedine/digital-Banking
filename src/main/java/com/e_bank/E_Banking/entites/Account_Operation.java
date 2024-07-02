@@ -7,7 +7,6 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ACCOUNT_OPERATIONS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
