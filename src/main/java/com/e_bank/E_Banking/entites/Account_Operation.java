@@ -7,7 +7,6 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ACCOUNT_OPERATIONS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -26,5 +25,7 @@ public class Account_Operation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_bank")
     private Bank_Account bankAccount;
+
+    private String description;
 
 }
