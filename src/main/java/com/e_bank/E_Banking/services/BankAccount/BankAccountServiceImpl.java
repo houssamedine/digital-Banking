@@ -3,6 +3,7 @@ package com.e_bank.E_Banking.services.BankAccount;
 import com.e_bank.E_Banking.Exceptions.BalanceNotSufficientException;
 import com.e_bank.E_Banking.Exceptions.BankAccountNotFoundException;
 import com.e_bank.E_Banking.Exceptions.CustomerNotFoundException;
+import com.e_bank.E_Banking.dtos.customer.CustomerResponseDto;
 import com.e_bank.E_Banking.entites.*;
 import com.e_bank.E_Banking.enums.OperationType;
 import com.e_bank.E_Banking.repository.AccountOperationRepository;
@@ -32,9 +33,10 @@ public class BankAccountServiceImpl implements BankAccountService {
         this.customerService = customerService;
     }
 
+/*
     @Override
     public CurrentAccount saveCurrentBankAccount(double initialBalance, double overDraft, String customerId) {
-        Customer customer= customerService.getCustomerById(customerId);
+        CustomerResponseDto customer= customerService.getCustomerById(customerId);
         if(customer == null){
             throw  new CustomerNotFoundException("Customer not found !!");
         }
@@ -51,7 +53,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public SavingAccount saveSavingBankAccount(double initialBalance, double interestRate, String customerId) {
-        Customer customer= customerService.getCustomerById(customerId);
+        CustomerResponseDto customer= customerService.getCustomerById(customerId);
         if(customer == null){
             throw  new CustomerNotFoundException("Customer not found !!");
         }
@@ -67,6 +69,17 @@ public class BankAccountServiceImpl implements BankAccountService {
         return saveCurrAccount;
     }
 
+*/
+
+    @Override
+    public CurrentAccount saveCurrentBankAccount(double initialBalance, double overDraft, String customerId) {
+        return null;
+    }
+
+    @Override
+    public SavingAccount saveSavingBankAccount(double initialBalance, double interestRate, String customerId) {
+        return null;
+    }
 
     @Override
     public Bank_Account getBankAccountById(String id) {
