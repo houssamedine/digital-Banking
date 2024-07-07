@@ -11,6 +11,7 @@ import java.util.List;
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id_customer;
     private String firstName;
     private String lastName;
@@ -18,7 +19,7 @@ public class Customer {
     private String photo;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //c'est en utilise pas les DTO il faut ajouter ça pour ne pas tember dans une boucle infinier
     private List<Bank_Account> bankAccountsList;
 
 }
