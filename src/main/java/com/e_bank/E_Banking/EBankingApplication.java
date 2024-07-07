@@ -28,7 +28,7 @@ public class EBankingApplication {
         SpringApplication.run(EBankingApplication.class, args);
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService, CustomerService customerService) {
         return args -> {
             Stream.of("Hassan", "Imane", "Mohamed").forEach(name -> {
@@ -56,7 +56,7 @@ public class EBankingApplication {
         };
     }
 
-    @Transactional
+    //@Transactional
     public void createAccountsAndPerformOperations(BankAccountService bankAccountService, Customer cust) throws CustomerNotFoundException, BankAccountNotFoundException, BalanceNotSufficientException {
         bankAccountService.saveCurrentBankAccount(Math.random() * 9000, 9000, cust.getId_customer());
         bankAccountService.saveSavingBankAccount(Math.random() * 12000, 5.5, cust.getId_customer());
