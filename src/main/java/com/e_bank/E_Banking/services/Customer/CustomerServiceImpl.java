@@ -69,14 +69,11 @@ public class CustomerServiceImpl implements CustomerService {
         return customerResponseDto;
     }
 
-
-
     @Override
     public CustomerResponseDto getCustomerById(String id) throws CustomerNotFoundException {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
         return customerMapper.fromCustomerToCustomerResponseDto(customer);
     }
-
 
     @Override
     public CustomerResponseDto getCustomerByEmail(String email) throws CustomerNotFoundException{
@@ -89,7 +86,6 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customers = customerRepository.findAll();
         List<CustomerResponseDto> customerResponseDtos = customers.stream().map(
                 cust -> customerMapper.fromCustomerToCustomerResponseDto(cust)).collect(Collectors.toList());
-
         return customerResponseDtos;
     }
 

@@ -31,31 +31,30 @@ public class CustomerController {
         }
     }
 
-
     @GetMapping("/id/{id}")
     public ResponseEntity<CustomerResponseDto> getCustomerById(@PathVariable String id) {
         try {
             CustomerResponseDto customer = customerService.getCustomerById(id);
             return ResponseEntity.ok(customer);
         } catch (CustomerNotFoundException e) {
-            return ResponseEntity.notFound().build(); // Retourne HTTP 404 Not Found
+            return ResponseEntity.notFound().build(); // Returner HTTP 404 Not Found
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); // Retourne HTTP 500 Internal Server Error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); // Returner HTTP 500 Internal Server Error
         }
     }
+
     @GetMapping("/email/{email}")
     public ResponseEntity<CustomerResponseDto> getCustomerByEmail(@PathVariable String email) {
         try {
             CustomerResponseDto customer = customerService.getCustomerByEmail(email);
             return ResponseEntity.ok(customer);
         } catch (CustomerNotFoundException e) {
-            return ResponseEntity.notFound().build(); // Retourne HTTP 404 Not Found
+            return ResponseEntity.notFound().build(); // Returner HTTP 404 Not Found
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); // Retourne HTTP 500 Internal Server Error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); // Returner HTTP 500 Internal Server Error
         }
     }
-
 
     @PostMapping()
     public ResponseEntity<?> createCustomer(@RequestBody @Valid CustomerRequestDto customerdto) {
@@ -92,8 +91,6 @@ public class CustomerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating customer.");
         }
     }
-
-
 
     @DeleteMapping("/supp/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable String id) {
